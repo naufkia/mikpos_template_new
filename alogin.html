@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+    <meta http-equiv="refresh" content="2; url=$(link-redirect)">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    <script>
+        function startClock() {
+            $(if popup == 'true')
+            open('$(link-status)', 'hotspot_status', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=290,height=200');
+        $(endif)
+        location.href = unescape('$(link-redirect-esc)');
+        }
+    </script> 
+</head>
+<body class="antialiased bg-slate-200" $(if advert-pending == 'yes') onLoad="openAdvert()" $(endif)>
+    <div class="flex justify-center">
+        <svg class="block" xmlns="http://www.w3.org/2000/svg" width="100px" height="100px" viewBox="0 0 100 100">
+            <rect y="25" width="10" height="50" rx="4" ry="4" fill="#000">
+              <animate attributeName="x" values="10;100" dur="1.2s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="rotate" from="0 10 70" to="-60 100 70" dur="1.2s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;1;0" dur="1.2s" repeatCount="indefinite"/>
+            </rect>
+            <rect y="25" width="10" height="50" rx="4" ry="4" fill="#000">
+              <animate attributeName="x" values="10;100" dur="1.2s" begin="0.4s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="rotate" from="0 10 70" to="-60 100 70" dur="1.2s" begin="0.4s" repeatCount="indefinite"/>
+             <animate attributeName="opacity" values="0;1;0" dur="1.2s" begin="0.4s" repeatCount="indefinite"/>
+            </rect>
+            <rect y="25" width="10" height="50" rx="4" ry="4" fill="#000">
+              <animate attributeName="x" values="10;100" dur="1.2s" begin="0.8s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="rotate" from="0 10 70" to="-60 100 70" dur="1.2s" begin="0.8s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;1;0" dur="1.2s" begin="0.8s" repeatCount="indefinite"/>
+            </rect>
+          </svg>
+    </div>
+    <div class="flex justify-center">
+        <span class="block font-medium font-xl">Berhasil terhubung!</span>
+    </div>
+    <div class="flex justify-center mt-5">
+        <a href="$(link-redirect)" class="my-0 w-36 m-2 text-gray-800 border-2 border-gray-800 font-medium transition-colors duration-150 bg-white rounded-lg hover:bg-gray-300 h-8 px-4 text-sm inline-flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 119 0v3.75M3.75 21.75h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+            </svg>
+            <span class="ml-2">Lanjut</span> 
+        </a>
+    </div>
+
+    <script>
+        const config = {
+            "hotspotname":  "MIKPOS.NET",
+            "rotuerid":     "1/1"
+        };
+
+        const hotspotname = config.hotspotname;
+        document.title = 'Status > ' + hotspotname;
+    </script>
+</body>
+</html>

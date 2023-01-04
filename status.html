@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+    $(if refresh-timeout)
+        <meta http-equiv="refresh" content="$(refresh-timeout-secs)">
+    $(endif)
+    <script>
+        $(if advert-pending == 'yes')
+        var popup = '';
+        function focusAdvert() {
+        if (window.focus) popup.focus();
+        }
+        function openAdvert() {
+        popup = open('$(link-advert)', 'hotspot_advert', '');
+        setTimeout("focusAdvert()", 1000);
+        }
+        $(endif)
+        function openLogout() {
+        if (window.name != 'hotspot_status') return true;
+            open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=280,height=250');
+        window.close();
+        return false;
+        }
+    </script>
+</head>
+<body class="antialiased bg-slate-200" $(if advert-pending == 'yes') onLoad="openAdvert()" $(endif)>
+    <div class="flex justify-center my-2 mx-4 md:mx-0">
+        <div class="w-full max-w-xl bg-white rounded-lg shadow-md p-6">
+            <h1 class="text-4xl font-medium">MIKPOS.NET</h1>
+            <p class="text-slate-500">Anda Telah Terhubung Internet 👍</p>
+
+            <form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
+                <table class="w-full mt-5" id="status">
+                    $(if login-by == 'trial')
+                    <tr><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static" align="right" style="width: 40%;">Username 
+                        <svg style="display: inline;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                        </svg>
+                    </td><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static">Trial</td></tr>
+
+                    $(elif login-by != 'mac')
+                    <tr><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static" align="right" style="width: 40%;">Username 
+                        <svg style="display: inline;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                        </svg>
+                    </td><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static" id="user">$(username)</td></tr>
+                    $(endif)
+
+                    <tr><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static" align="right">IP Address 
+                        <svg style="display: inline;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
+                        </svg>
+                    </td><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static">$(ip)</td></tr>
+
+                    <!-- <tr><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static" align="right">MAC <i class="icon icon-barcode">&#xe80a;</i> </td><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static">$(mac)</td></tr> -->
+
+                    <tr><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static" align="right">Upload 
+                        <svg style="display: inline;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11.25l-3-3m0 0l-3 3m3-3v7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </td><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static">$(bytes-in-nice)</td></tr>
+
+                    <tr><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static" align="right">Download 
+                        <svg style="display: inline;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </td><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static">$(bytes-out-nice)</td></tr>
+
+                    <tr><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static" align="right">Terkoneksi 
+                        <svg style="display: inline;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+                        </svg>
+                    </td><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static" id="uptime">$(uptime)</td></tr>
+
+                    $(if remain-bytes-total)
+                    <tr><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static" align="right">Sisa Kuota 
+                        <svg style="display: inline;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                        </svg>   
+                    </td><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static">$(remain-bytes-total-nice)</td></tr>
+                    $(endif)
+
+                    $(if session-time-left)
+                    <tr><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static" align="right">Sisa Waktu 
+                        <svg style="display: inline;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>                              
+                    </td><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static" id="lefttime">$(session-time-left)</td></tr>
+                    $(endif)
+
+                    $(if blocked == 'yes')
+                    <tr><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static" align="right">Status 
+                        <svg style="display: inline;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                        </svg>                              
+                    </td><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static"><div style="color: #FF8080">
+                    <a href="$(link-advert)" target="hotspot_advert">advertisement</a> required</div></td></tr>
+
+                    $(elif refresh-timeout)
+                    <tr><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static" align="right">Refresh 
+                        <svg style="display: inline;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                        </svg>                          
+                    </td><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static" id="refresh">$(refresh-timeout)</td></tr>
+                    $(endif)
+
+                    <tr><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static" align="right">Expired 
+                        <svg style="display: inline;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                        </svg>                          
+                    </td><td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static" id="expdate"></td></tr>
+
+                    <tr id="trR" style="display: none"><td  align="right">Remaining 
+                        <svg style="display: inline;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                        </svg>                          
+                    <td class="p-3 text-gray-800 text-center border border-b lg:table-cell relative lg:static" id="remaining"></td></tr>
+                </table>
+                $(if login-by-mac != 'yes')
+                <button type="submit" class="w-full mt-5 py-3 font-medium text-white bg-gray-600 hover:bg-gray-500 rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                    </svg>
+                    <span>Logout</span>
+                </button>
+                $(endif)
+            </form>
+        </div>
+    </div>
+    
+
+    <script>
+        const config = {
+            "hotspotname":  "MIKPOS.NET",
+            "rotuerid":     "1/1"
+        };
+
+        const hotspotname = config.hotspotname;
+        document.title = 'Status > ' + hotspotname;
+
+        fetch('https://mikpos.space/expire/' + config.rotuerid + '/$(username)', {
+        Method: 'GET',
+        }).then((response) => response.text()).then((result) => {
+            document.getElementById('expdate').innerHTML = result;
+        });
+
+        localStorage.setItem('lastuser', '$(username)');
+    </script>
+</body>
+</html>

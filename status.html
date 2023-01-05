@@ -131,17 +131,12 @@
         </div>
     </div>
     
-
+    <script src="config.js"></script>
     <script>
-        const config = {
-            "hotspotname":  "MIKPOS.NET",
-            "rotuerid":     "1/1"
-        };
-
         const hotspotname = config.hotspotname;
         document.title = 'Status > ' + hotspotname;
 
-        fetch('https://mikpos.space/expire/' + config.rotuerid + '/$(username)', {
+        fetch(config.mikposAppServer + '/expire/' + config.rotuerid + '/$(username)', {
         Method: 'GET',
         }).then((response) => response.text()).then((result) => {
             document.getElementById('expdate').innerHTML = result;

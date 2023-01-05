@@ -283,9 +283,11 @@
             if (state) {
                 fadeIn(modal);
                 disableScroll()
+                window.scrollTo({top: 0, behavior: 'smooth'});
             } else {
                 fadeOut(modal);
                 enableScroll()
+                window.scrollTo({top: 0, behavior: 'smooth'});
             }
             iframe.style.display = 'none';
             loading.style.display = 'initial';

@@ -232,11 +232,12 @@
 
     <script>
         const config = {
-            "hotspotname":  "MIKPOS.NET",
-            "adsBanner": true,
-            "adsInterval": 3000,
-            "adsImage": ["1.jpg", "2.jpg", "3.jpg"],
-            "rotuerid":     "1/1"
+            "hotspotname":  "MIKPOS.NET", // NAMA HOTSPOT
+            "adsBanner": true, // TRUE OR FALSE (ENABLE DISABLE ADS BANNER)
+            "adsInterval": 3000, // INTERVAL GANTI GAMBAR
+            "adsImage": ["1.jpg", "2.jpg", "3.jpg"], // GAMBAR ADS BANNER
+            "mikposAppServer": "https://mikpos.space", //URL MIKPOS APP
+            "rotuerid": "1/1" // ROUTER ID
         };
 
         const hotspotname = config.hotspotname;
@@ -297,13 +298,13 @@
             info.style.display = 'none';
             switch (id) {
                 case 'buy' :
-                    iframe.src='https://mikpos.space/tbeli/' + config.rotuerid;
+                    iframe.src=config.mikposAppServer + '/tbeli/' + config.rotuerid;
                 break;
                 case 'extend' :
-                    iframe.src='https://mikpos.space/tperpanjang/' + config.rotuerid;
+                    iframe.src=config.mikposAppServer + '/tperpanjang/' + config.rotuerid;
                 break;
                 case 'check' :
-                    iframe.src='https://mikpos.space/tchk/' + config.rotuerid;
+                    iframe.src=config.mikposAppServer + '/tchk/' + config.rotuerid;
                 break;
                 case 'info' :
                     iframe.style.display = 'none';
@@ -311,7 +312,7 @@
                     info.style.display = 'initial';
                 break;
 
-            }     
+            }
         }
         function fadeOut(el) {
             el.style.opacity = 1;

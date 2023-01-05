@@ -29,7 +29,7 @@
 <body class="antialiased bg-slate-200" $(if advert-pending == 'yes') onLoad="openAdvert()" $(endif)>
     <div class="flex justify-center my-2 mx-4 md:mx-0">
         <div class="w-full max-w-xl bg-white rounded-lg shadow-md p-6">
-            <h1 class="text-4xl font-medium">MIKPOS.NET</h1>
+            <h1 id="hotspotname" class="text-4xl font-medium"></h1>
             <p class="text-slate-500">Anda Telah Terhubung Internet 👍</p>
 
             <form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
@@ -135,6 +135,7 @@
     <script>
         const hotspotname = config.hotspotname;
         document.title = 'Status > ' + hotspotname;
+        document.getElementById('hotspotname').innerHTML = config.hotspotname;
 
         fetch(config.mikposAppServer + '/expire/' + config.rotuerid + '/$(username)', {
         Method: 'GET',

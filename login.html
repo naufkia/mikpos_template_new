@@ -33,7 +33,7 @@
                 <img id="slider" class="image-slider" />
             </div>
 
-            <h1 class="text-4xl font-medium">MIKPOS.NET</h1>
+            <h1 id="hotspotname" class="text-4xl font-medium"></h1>
             <p class="text-slate-500">Halo, silahkan login untuk melanjutkan 👋</p>
 
             <div class="my-5 flex justify-between gap-1">
@@ -233,6 +233,7 @@
     <script>
         const hotspotname = config.hotspotname;
         document.title = 'Login > ' + hotspotname;
+        document.getElementById('hotspotname').innerHTML = config.hotspotname;
 
         const lastuser = localStorage.getItem('lastuser')
         if (lastuser) {

@@ -29,6 +29,10 @@
 
     <div class="flex justify-center my-2 mx-2 md:mx-0">
         <div class="w-full max-w-xl bg-white rounded-lg shadow-md py-6 px-3">
+            <div style="display: none;" id="slider-content" class="flex justify-center slider mb-6">
+                <img id="slider" class="image-slider" />
+            </div>
+
             <h1 class="text-4xl font-medium">MIKPOS.NET</h1>
             <p class="text-slate-500">Halo, silahkan login untuk melanjutkan 👋</p>
 
@@ -229,6 +233,9 @@
     <script>
         const config = {
             "hotspotname":  "MIKPOS.NET",
+            "adsBanner": true,
+            "adsInterval": 3000,
+            "adsImage": ["1.jpg", "2.jpg", "3.jpg"],
             "rotuerid":     "1/1"
         };
 
@@ -327,6 +334,25 @@
                 }
             })();
         }
+        
+        if (config.adsBanner) {
+            let i=0
+            let images = config.adsImage
+            
+            const slider = document.getElementById('slider')
+            document.getElementById('slider-content').style.display = 'block'
+            function changePic(){
+                slider.src = images[i]
+                if(i<images.length-1){
+                    i++
+                }else{
+                    i=0
+                }
+                setTimeout("changePic()", config.adsInterval)
+            }
+            changePic()
+        }
+        
     </script>
 </body>
 </html>
